@@ -40,7 +40,7 @@ exports.testOrder = testOrder;
 var grammy_1 = require("grammy");
 function testOrder(conversation, ctx) {
     return __awaiter(this, void 0, void 0, function () {
-        var request, question, responceCourier, photo, photoResponce;
+        var request, question, responceCourier, photo, photoResponce, photoCtx, file;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -90,11 +90,11 @@ function testOrder(conversation, ctx) {
                 case 4:
                     responceCourier = _a.sent();
                     return [4 /*yield*/, ctx.reply('Хотите приложить фото к пояснению?', {
-                            reply_markup: new grammy_1.InlineKeyboard().text('Да', 'Да').text('Нет', 'Нет'),
+                            reply_markup: new grammy_1.InlineKeyboard().text('Да', 'Да тест').text('Нет', 'Нет тест'),
                         })];
                 case 5:
                     photo = _a.sent();
-                    return [4 /*yield*/, conversation.waitForCallbackQuery(['Да', 'Нет'], {
+                    return [4 /*yield*/, conversation.waitForCallbackQuery(['Да тест', 'Нет тест'], {
                             otherwise: function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
@@ -111,18 +111,37 @@ function testOrder(conversation, ctx) {
                         })];
                 case 6:
                     photoResponce = _a.sent();
-                    if (photoResponce.callbackQuery.data === 'Да') {
-                        // тут пишем код для загрузки рисунка на сервер и завершения диалога
-                    }
-                    if (!(photoResponce.callbackQuery.data === 'Нет')) return [3 /*break*/, 8];
+                    if (!(photoResponce.callbackQuery.data === 'Да тест')) return [3 /*break*/, 10];
+                    ctx.reply('Добавьте свое фото в чат');
+                    return [4 /*yield*/, conversation.waitFor(':photo', {
+                            otherwise: function (ctx) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                                return [2 /*return*/, ctx.reply('Принимаются только фото')];
+                            }); }); },
+                        })];
+                case 7:
+                    photoCtx = _a.sent();
+                    return [4 /*yield*/, photoCtx.getFile()];
+                case 8:
+                    file = _a.sent();
+                    // const uploadedFileUrl = await uploadTelegramFileToStorage(file.file_path!);
+                    return [4 /*yield*/, photoCtx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2 <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>, \u0444\u043E\u0442\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E", {
+                            parse_mode: 'HTML',
+                        })];
+                case 9:
+                    // const uploadedFileUrl = await uploadTelegramFileToStorage(file.file_path!);
+                    _a.sent();
+                    return [2 /*return*/];
+                case 10:
+                    if (!(photoResponce.callbackQuery.data === 'Нет тест')) return [3 /*break*/, 12];
+                    console.log('11111');
                     return [4 /*yield*/, ctx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2 <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>", {
                             parse_mode: 'HTML',
                             reply_parameters: { message_id: question.message_id, quote: question.text },
                         })];
-                case 7:
+                case 11:
                     _a.sent();
-                    _a.label = 8;
-                case 8: return [2 /*return*/];
+                    _a.label = 12;
+                case 12: return [2 /*return*/];
             }
         });
     });

@@ -51,10 +51,10 @@ export async function testOrder(conversation: Conversation, ctx: Context) {
     });
 
   const photo = await ctx.reply('Хотите приложить фото к пояснению?', {
-    reply_markup: new InlineKeyboard().text('Да', 'Да').text('Нет', 'Нет'),
+    reply_markup: new InlineKeyboard().text('Да', 'Да тест').text('Нет', 'Нет тест'),
   });
 
-  const photoResponce = await conversation.waitForCallbackQuery(['Да', 'Нет'], {
+  const photoResponce = await conversation.waitForCallbackQuery(['Да тест', 'Нет тест'], {
     otherwise: async (ctx) => {
       await ctx.reply(`<b>Ошибка!</b>. Выберете ответ, нажав кнопку Да/Нет`, {
         parse_mode: 'HTML',
@@ -63,12 +63,22 @@ export async function testOrder(conversation: Conversation, ctx: Context) {
     },
   });
 
-  if (photoResponce.callbackQuery.data === 'Да') {
-    // тут пишем код для загрузки рисунка на сервер и завершения диалога
+  if (photoResponce.callbackQuery.data === 'Да тест') {
+    ctx.reply('Добавьте свое фото в чат');
+    let photoCtx = await conversation.waitFor(':photo', {
+      otherwise: async (ctx) => ctx.reply('Принимаются только фото'),
+    });
+
+    await photoCtx.getFile();
+    await photoCtx.reply(`Спасибо, ваши пояснения по заказу 175-2 <b>приняты</b>, фото загружено`, {
+      parse_mode: 'HTML',
+    });
+    return;
   }
 
   // завершение диалога без рисунка
-  if (photoResponce.callbackQuery.data === 'Нет') {
+  if (photoResponce.callbackQuery.data === 'Нет тест') {
+    console.log('11111');
     await ctx.reply(`Спасибо, ваши пояснения по заказу 175-2 <b>приняты</b>`, {
       parse_mode: 'HTML',
       reply_parameters: { message_id: question.message_id, quote: question.text },
