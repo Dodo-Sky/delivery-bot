@@ -78,7 +78,6 @@ export async function testOrder(conversation: Conversation, ctx: Context) {
 
   // завершение диалога без рисунка
   if (photoResponce.callbackQuery.data === 'Нет тест') {
-    console.log('11111');
     await ctx.reply(`Спасибо, ваши пояснения по заказу 175-2 <b>приняты</b>`, {
       parse_mode: 'HTML',
       reply_parameters: { message_id: question.message_id, quote: question.text },

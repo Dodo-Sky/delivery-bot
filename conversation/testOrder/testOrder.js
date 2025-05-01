@@ -40,7 +40,7 @@ exports.testOrder = testOrder;
 var grammy_1 = require("grammy");
 function testOrder(conversation, ctx) {
     return __awaiter(this, void 0, void 0, function () {
-        var request, question, responceCourier, photo, photoResponce, photoCtx, file;
+        var request, question, responceCourier, photo, photoResponce, photoCtx;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -122,18 +122,15 @@ function testOrder(conversation, ctx) {
                     photoCtx = _a.sent();
                     return [4 /*yield*/, photoCtx.getFile()];
                 case 8:
-                    file = _a.sent();
-                    // const uploadedFileUrl = await uploadTelegramFileToStorage(file.file_path!);
+                    _a.sent();
                     return [4 /*yield*/, photoCtx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2 <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>, \u0444\u043E\u0442\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E", {
                             parse_mode: 'HTML',
                         })];
                 case 9:
-                    // const uploadedFileUrl = await uploadTelegramFileToStorage(file.file_path!);
                     _a.sent();
                     return [2 /*return*/];
                 case 10:
                     if (!(photoResponce.callbackQuery.data === 'Нет тест')) return [3 /*break*/, 12];
-                    console.log('11111');
                     return [4 /*yield*/, ctx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2 <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>", {
                             parse_mode: 'HTML',
                             reply_parameters: { message_id: question.message_id, quote: question.text },

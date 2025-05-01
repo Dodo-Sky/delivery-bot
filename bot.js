@@ -10,6 +10,7 @@ var listCommands_1 = require("./commands/listCommands");
 var handlers_1 = require("./commands/handlers");
 var config_1 = require("./config");
 var bot = new grammy_1.Bot(config_1.TELEGRAM_BOT_TOKEN);
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 bot.api.config.use((0, auto_retry_1.autoRetry)({
     rethrowInternalServerErrors: true, // не обрабатывать внутренние ошибки сервера
 }));
@@ -26,6 +27,7 @@ bot.on('callback_query:data', middleware_1.responceCourier);
 bot.command('qrcode', function (ctx) { return (0, handlers_1.qrcode)(ctx); });
 bot.command('payment', function (ctx) { return (0, handlers_1.payment)(ctx); });
 bot.command('my_orders', function (ctx) { return (0, handlers_1.my_orders)(ctx); });
+bot.command('mysalary', function (ctx) { return (0, handlers_1.mysalary)(ctx); });
 // bot.command('problem_orders', (ctx) => problem_orders(ctx));
 bot.command('faq', function (ctx) { return ctx.reply((0, handlers_1.faq)(), { parse_mode: 'Markdown' }); });
 bot.command('start', function (ctx) { return ctx.reply((0, handlers_1.start)()); });

@@ -1,7 +1,5 @@
-import { postDataServer, getDataFromServer } from '../services/api';
+import { postDataServer } from '../services/api';
 import { type Context } from 'grammy';
-import { StaffData, CouriersOrder } from '../type/type';
-import { sub, format } from "date-fns";
 
 export function qrcode(ctx: Context) {
   postDataServer('qrcode', { content: '/qrcode', chatId: ctx.chatId });
@@ -9,6 +7,10 @@ export function qrcode(ctx: Context) {
 
 export function payment(ctx: Context) {
   postDataServer('payment', { content: '/payment', chatId: ctx.chatId });
+}
+
+export function mysalary(ctx: Context) {
+  postDataServer('mysalary', { content: '/mysalary', chatId: ctx.chatId });
 }
 
 export function faq() {
