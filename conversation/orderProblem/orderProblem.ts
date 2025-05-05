@@ -23,14 +23,11 @@ export async function responce(conversation: Conversation, ctx: Context) {
     return;
   }
 
-  let question = await ctx.reply(`Ответ по заказу ${order.orderNumber}`, {
-    reply_markup: { force_reply: true },
-  });
-
+  const question = await ctx.reply(`Напишите в чат ваш ответ текстом по заказу ${order.orderNumber}`);
   const responceCourier = await conversation
-    .waitForReplyTo(question.message_id, {
+    .waitFor('message:text', {
       otherwise: (ctx) =>
-        ctx.reply(`<b>Ошибка!</b> Вначале ответьте на заказ ${order.orderNumber}`, {
+        ctx.reply(`<b>Ошибка!</b> Вначале ответьте на заказ ${order.orderNumber}. Ответ принимается только текстом`, {
           reply_parameters: { message_id: question.message_id },
           parse_mode: 'HTML',
         }),
@@ -72,11 +69,16 @@ export async function responce(conversation: Conversation, ctx: Context) {
 
     const file = await photoCtx.getFile();
     const uploadedFileUrl = await uploadTelegramFileToStorage(file.file_path!);
-    console.log(uploadedFileUrl);
-    await photoCtx.reply(`Спасибо, ваши пояснения по заказу ${order.orderNumber} <b>приняты</b>, фото загружено`, {
+
+    await ctx.replyWithPhoto(photoCtx.message?.photo.at(-1)?.file_id!, {
+      caption: `<b>Отчет!</b>
+Спасибо, приняты следующие пояснения по заказу ${order.orderNumber}
+- ${responceCourier.msg.text}`,
+      reply_parameters: { message_id: question.message_id, quote: question.text },
       parse_mode: 'HTML',
     });
     order.urlPhoto = uploadedFileUrl;
+
     await conversation.external(() => {
       postDataServer('couriersOrder', order);
     });
@@ -85,10 +87,15 @@ export async function responce(conversation: Conversation, ctx: Context) {
 
   // завершение диалога без рисунка
   if (photoResponce.callbackQuery.data === 'Нет') {
-    await ctx.reply(`Спасибо, ваши пояснения по заказу ${order.orderNumber} <b>приняты</b>`, {
-      parse_mode: 'HTML',
-      reply_parameters: { message_id: question.message_id, quote: question.text },
-    });
+    await ctx.reply(
+      `<b>Отчет!</b>
+Спасибо, приняты следующие пояснения по заказу ${order.orderNumber}
+- ${responceCourier.msg.text}`,
+      {
+        reply_parameters: { message_id: question.message_id, quote: question.text },
+        parse_mode: 'HTML',
+      },
+    );
     await conversation.external(() => {
       postDataServer('couriersOrder', order);
     });

@@ -109,7 +109,7 @@ function uploadFile(fileName, filePath) {
  */
 function getObjectUrl(objectName_1) {
     return __awaiter(this, arguments, void 0, function (objectName, isPublicBucket) {
-        if (isPublicBucket === void 0) { isPublicBucket = false; }
+        if (isPublicBucket === void 0) { isPublicBucket = true; }
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:

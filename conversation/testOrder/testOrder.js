@@ -42,14 +42,15 @@ function testOrder(conversation, ctx) {
     return __awaiter(this, void 0, void 0, function () {
         var request, question, responceCourier, photo, photoResponce, photoCtx;
         var _this = this;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0: return [4 /*yield*/, ctx.reply("*\u041F\u0440\u043E\u0441\u0440\u043E\u0447\u043A\u0430  \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443* \n\u043A\u0443\u0440\u044C\u0435\u0440 - \u0418\u0432\u0430\u043D\u043E\u0432 \u0418\u0432\u0430\u043D \u0418\u0432\u0430\u043D\u043E\u0432\u0438\u0447;\n\u043D\u043E\u043C\u0435\u0440 \u0437\u0430\u043A\u0430\u0437\u0430 - 175-2;\n\u043F\u0438\u0446\u0446\u0435\u0440\u0438\u044F - \u0422\u044E\u043C\u0435\u043D\u044C-4;\n\u0432\u0440\u0435\u043C\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F - 2024-11-18 20:19;\n\u0432\u0440\u0435\u043C\u044F \u043F\u0435\u0440\u0435\u0434\u0430\u0447\u0438 \u0437\u0430\u043A\u0430\u0437\u0430 \u043A\u043B\u0438\u0435\u043D\u0442\u0443 - 2024-11-18 20:48;\n\n\u043F\u0440\u043E\u0433\u043D\u043E\u0437\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 (\u0441 \u0443\u0447\u0435\u0442\u043E\u043C extraTime) -  22,8 \u043C\u0438\u043D\u0443\u0442;\n\u0444\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043F\u043E\u0435\u0437\u0434\u043A\u0438 - 29,6 \u043C\u0438\u043D\u0443\u0442;\n\u0432\u044B \u043F\u0440\u0435\u0432\u044B\u0441\u0438\u043B\u0438 \u043F\u0440\u043E\u0433\u043D\u043E\u0437 \u043D\u0430  - *6,8 \u043C\u0438\u043D\u0443\u0442*;\n\n\u0412 \u043E\u0442\u0432\u0435\u0442\u043D\u043E\u043C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0438 \u043D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0443\u044E \u043F\u0440\u0438\u0447\u0438\u043D\u0443 \u0437\u0430\u0434\u0435\u0440\u0436\u043A\u0438 \u043F\u043E \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0435 \u0437\u0430\u043A\u0430\u0437\u0430.\n\u0421 \u0443\u0447\u0435\u0442\u043E\u043C \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0439 \u0432\u0430\u043C\u0438 \u043F\u0440\u0438\u0447\u0438\u043D\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0449\u0438\u043C \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u0438\u043D\u044F\u0442\u043E \u0434\u0430\u043B\u044C\u043D\u0435\u0439\u0448\u0435\u0435 \u0440\u0435\u0448\u0435\u043D\u0438\u0435.", {
                         parse_mode: 'Markdown',
                         reply_markup: new grammy_1.InlineKeyboard().text('Ответить', 'Ответить'),
                     })];
                 case 1:
-                    request = _a.sent();
+                    request = _c.sent();
                     return [4 /*yield*/, conversation.waitForCallbackQuery('Ответить', {
                             otherwise: function (ctx) {
                                 return ctx.reply('<b>Ошибка!</b> Нажмите кнопку <b>ответить!</b>', {
@@ -59,16 +60,14 @@ function testOrder(conversation, ctx) {
                             },
                         })];
                 case 2:
-                    _a.sent();
-                    return [4 /*yield*/, ctx.reply("\u041E\u0442\u0432\u0435\u0442 \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2", {
-                            reply_markup: { force_reply: true },
-                        })];
+                    _c.sent();
+                    return [4 /*yield*/, ctx.reply("\u041D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \u0432 \u0447\u0430\u0442 \u0432\u0430\u0448 \u043E\u0442\u0432\u0435\u0442 \u0442\u0435\u043A\u0441\u0442\u043E\u043C \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2")];
                 case 3:
-                    question = _a.sent();
+                    question = _c.sent();
                     return [4 /*yield*/, conversation
-                            .waitForReplyTo(question.message_id, {
+                            .waitFor('message:text', {
                             otherwise: function (ctx) {
-                                return ctx.reply('<b>Ошибка!</b> Ответьте на заказ 175-2', {
+                                return ctx.reply("<b>\u041E\u0448\u0438\u0431\u043A\u0430!</b> \u0412\u043D\u0430\u0447\u0430\u043B\u0435 \u043E\u0442\u0432\u0435\u0442\u044C\u0442\u0435 \u043D\u0430 \u0437\u0430\u043A\u0430\u0437 175-2. \u041E\u0442\u0432\u0435\u0442 \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0442\u0435\u043A\u0441\u0442\u043E\u043C", {
                                     reply_parameters: { message_id: question.message_id },
                                     parse_mode: 'HTML',
                                 });
@@ -88,12 +87,12 @@ function testOrder(conversation, ctx) {
                             }); },
                         })];
                 case 4:
-                    responceCourier = _a.sent();
+                    responceCourier = _c.sent();
                     return [4 /*yield*/, ctx.reply('Хотите приложить фото к пояснению?', {
                             reply_markup: new grammy_1.InlineKeyboard().text('Да', 'Да тест').text('Нет', 'Нет тест'),
                         })];
                 case 5:
-                    photo = _a.sent();
+                    photo = _c.sent();
                     return [4 /*yield*/, conversation.waitForCallbackQuery(['Да тест', 'Нет тест'], {
                             otherwise: function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
@@ -110,7 +109,7 @@ function testOrder(conversation, ctx) {
                             }); },
                         })];
                 case 6:
-                    photoResponce = _a.sent();
+                    photoResponce = _c.sent();
                     if (!(photoResponce.callbackQuery.data === 'Да тест')) return [3 /*break*/, 10];
                     ctx.reply('Добавьте свое фото в чат');
                     return [4 /*yield*/, conversation.waitFor(':photo', {
@@ -119,25 +118,27 @@ function testOrder(conversation, ctx) {
                             }); }); },
                         })];
                 case 7:
-                    photoCtx = _a.sent();
+                    photoCtx = _c.sent();
                     return [4 /*yield*/, photoCtx.getFile()];
                 case 8:
-                    _a.sent();
-                    return [4 /*yield*/, photoCtx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2 <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>, \u0444\u043E\u0442\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E", {
+                    _c.sent();
+                    return [4 /*yield*/, ctx.replyWithPhoto((_b = (_a = photoCtx.message) === null || _a === void 0 ? void 0 : _a.photo.at(-1)) === null || _b === void 0 ? void 0 : _b.file_id, {
+                            caption: "<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2\n- ".concat(responceCourier.msg.text),
+                            reply_parameters: { message_id: question.message_id, quote: question.text },
                             parse_mode: 'HTML',
                         })];
                 case 9:
-                    _a.sent();
+                    _c.sent();
                     return [2 /*return*/];
                 case 10:
                     if (!(photoResponce.callbackQuery.data === 'Нет тест')) return [3 /*break*/, 12];
-                    return [4 /*yield*/, ctx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2 <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>", {
-                            parse_mode: 'HTML',
+                    return [4 /*yield*/, ctx.reply("<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 175-2\n- ".concat(responceCourier.msg.text), {
                             reply_parameters: { message_id: question.message_id, quote: question.text },
+                            parse_mode: 'HTML',
                         })];
                 case 11:
-                    _a.sent();
-                    _a.label = 12;
+                    _c.sent();
+                    _c.label = 12;
                 case 12: return [2 /*return*/];
             }
         });

@@ -64,31 +64,29 @@ function responce(conversation, ctx) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, orderId, departmentName, order, question, responceCourier, photo, photoResponce, photoCtx, file, uploadedFileUrl;
         var _this = this;
-        var _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        var _b, _c, _d;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
                 case 0: return [4 /*yield*/, ((_b = ctx.callbackQuery) === null || _b === void 0 ? void 0 : _b.data.split(':'))];
                 case 1:
-                    _a = _c.sent(), orderId = _a[1], departmentName = _a[2];
+                    _a = _e.sent(), orderId = _a[1], departmentName = _a[2];
                     return [4 /*yield*/, conversation.external(function () {
                             return getOrderFromServer(orderId, departmentName);
                         })];
                 case 2:
-                    order = _c.sent();
+                    order = _e.sent();
                     if (!!order) return [3 /*break*/, 4];
                     return [4 /*yield*/, ctx.reply('Поездка устарела и ее нет в базе данных')];
                 case 3:
-                    _c.sent();
+                    _e.sent();
                     return [2 /*return*/];
-                case 4: return [4 /*yield*/, ctx.reply("\u041E\u0442\u0432\u0435\u0442 \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber), {
-                        reply_markup: { force_reply: true },
-                    })];
+                case 4: return [4 /*yield*/, ctx.reply("\u041D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \u0432 \u0447\u0430\u0442 \u0432\u0430\u0448 \u043E\u0442\u0432\u0435\u0442 \u0442\u0435\u043A\u0441\u0442\u043E\u043C \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber))];
                 case 5:
-                    question = _c.sent();
+                    question = _e.sent();
                     return [4 /*yield*/, conversation
-                            .waitForReplyTo(question.message_id, {
+                            .waitFor('message:text', {
                             otherwise: function (ctx) {
-                                return ctx.reply("<b>\u041E\u0448\u0438\u0431\u043A\u0430!</b> \u0412\u043D\u0430\u0447\u0430\u043B\u0435 \u043E\u0442\u0432\u0435\u0442\u044C\u0442\u0435 \u043D\u0430 \u0437\u0430\u043A\u0430\u0437 ".concat(order.orderNumber), {
+                                return ctx.reply("<b>\u041E\u0448\u0438\u0431\u043A\u0430!</b> \u0412\u043D\u0430\u0447\u0430\u043B\u0435 \u043E\u0442\u0432\u0435\u0442\u044C\u0442\u0435 \u043D\u0430 \u0437\u0430\u043A\u0430\u0437 ".concat(order.orderNumber, ". \u041E\u0442\u0432\u0435\u0442 \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0442\u0435\u043A\u0441\u0442\u043E\u043C"), {
                                     reply_parameters: { message_id: question.message_id },
                                     parse_mode: 'HTML',
                                 });
@@ -108,7 +106,7 @@ function responce(conversation, ctx) {
                             }); },
                         })];
                 case 6:
-                    responceCourier = _c.sent();
+                    responceCourier = _e.sent();
                     return [4 /*yield*/, conversation.external(function () {
                             if (responceCourier.msg.text) {
                                 var dateResponce = (0, date_fns_1.fromUnixTime)(responceCourier.msg.date).toLocaleString();
@@ -117,12 +115,12 @@ function responce(conversation, ctx) {
                             }
                         })];
                 case 7:
-                    _c.sent();
+                    _e.sent();
                     return [4 /*yield*/, ctx.reply('Хотите приложить фото к пояснению?', {
                             reply_markup: new grammy_1.InlineKeyboard().text('Да', 'Да').text('Нет', 'Нет'),
                         })];
                 case 8:
-                    photo = _c.sent();
+                    photo = _e.sent();
                     return [4 /*yield*/, conversation.waitForCallbackQuery(['Да', 'Нет'], {
                             otherwise: function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
@@ -139,7 +137,7 @@ function responce(conversation, ctx) {
                             }); },
                         })];
                 case 9:
-                    photoResponce = _c.sent();
+                    photoResponce = _e.sent();
                     if (!(photoResponce.callbackQuery.data === 'Да')) return [3 /*break*/, 15];
                     ctx.reply('Добавьте свое фото в чат');
                     return [4 /*yield*/, conversation.waitFor(':photo', {
@@ -148,39 +146,40 @@ function responce(conversation, ctx) {
                             }); }); },
                         })];
                 case 10:
-                    photoCtx = _c.sent();
+                    photoCtx = _e.sent();
                     return [4 /*yield*/, photoCtx.getFile()];
                 case 11:
-                    file = _c.sent();
+                    file = _e.sent();
                     return [4 /*yield*/, (0, files_1.uploadTelegramFileToStorage)(file.file_path)];
                 case 12:
-                    uploadedFileUrl = _c.sent();
-                    console.log(uploadedFileUrl);
-                    return [4 /*yield*/, photoCtx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, " <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>, \u0444\u043E\u0442\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E"), {
+                    uploadedFileUrl = _e.sent();
+                    return [4 /*yield*/, ctx.replyWithPhoto((_d = (_c = photoCtx.message) === null || _c === void 0 ? void 0 : _c.photo.at(-1)) === null || _d === void 0 ? void 0 : _d.file_id, {
+                            caption: "<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, "\n- ").concat(responceCourier.msg.text),
+                            reply_parameters: { message_id: question.message_id, quote: question.text },
                             parse_mode: 'HTML',
                         })];
                 case 13:
-                    _c.sent();
+                    _e.sent();
                     order.urlPhoto = uploadedFileUrl;
                     return [4 /*yield*/, conversation.external(function () {
                             (0, api_1.postDataServer)('couriersOrder', order);
                         })];
                 case 14:
-                    _c.sent();
+                    _e.sent();
                     return [2 /*return*/];
                 case 15:
                     if (!(photoResponce.callbackQuery.data === 'Нет')) return [3 /*break*/, 18];
-                    return [4 /*yield*/, ctx.reply("\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0438 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, " <b>\u043F\u0440\u0438\u043D\u044F\u0442\u044B</b>"), {
-                            parse_mode: 'HTML',
+                    return [4 /*yield*/, ctx.reply("<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, "\n- ").concat(responceCourier.msg.text), {
                             reply_parameters: { message_id: question.message_id, quote: question.text },
+                            parse_mode: 'HTML',
                         })];
                 case 16:
-                    _c.sent();
+                    _e.sent();
                     return [4 /*yield*/, conversation.external(function () {
                             (0, api_1.postDataServer)('couriersOrder', order);
                         })];
                 case 17:
-                    _c.sent();
+                    _e.sent();
                     return [2 /*return*/];
                 case 18: return [2 /*return*/];
             }

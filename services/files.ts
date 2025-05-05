@@ -47,7 +47,7 @@ async function uploadFile(fileName: string, filePath: string): Promise<UploadedO
  * Если бакет публичный, возвращается прямой URL.
  * Если бакет приватный, генерируется подписанный URL.
  */
-export async function getObjectUrl(objectName: string, isPublicBucket = false): Promise<string> {
+export async function getObjectUrl(objectName: string, isPublicBucket = true): Promise<string> {
   if (isPublicBucket) {
     return `https://${S3_ENDPOINT}/${S3_BUCKET_NAME}/${encodeURIComponent(objectName)}`; // Прямой URL для публичного бакета
   }

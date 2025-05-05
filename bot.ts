@@ -9,7 +9,6 @@ import { qrcode, faq, payment, start, my_orders, mysalary } from "./commands/han
 import { TELEGRAM_BOT_TOKEN } from './config';
 
 const bot = new Bot<ConversationFlavor<Context>>(TELEGRAM_BOT_TOKEN);
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 bot.api.config.use(
   autoRetry({
     rethrowInternalServerErrors: true, // не обрабатывать внутренние ошибки сервера

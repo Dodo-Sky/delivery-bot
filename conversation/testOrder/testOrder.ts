@@ -30,14 +30,12 @@ export async function testOrder(conversation: Conversation, ctx: Context) {
       }),
   });
 
-  let question = await ctx.reply(`Ответ по заказу 175-2`, {
-    reply_markup: { force_reply: true },
-  });
+  const question = await ctx.reply(`Напишите в чат ваш ответ текстом по заказу 175-2`);
 
   const responceCourier = await conversation
-    .waitForReplyTo(question.message_id, {
+    .waitFor('message:text', {
       otherwise: (ctx) =>
-        ctx.reply('<b>Ошибка!</b> Ответьте на заказ 175-2', {
+        ctx.reply(`<b>Ошибка!</b> Вначале ответьте на заказ 175-2. Ответ принимается только текстом`, {
           reply_parameters: { message_id: question.message_id },
           parse_mode: 'HTML',
         }),
@@ -70,7 +68,11 @@ export async function testOrder(conversation: Conversation, ctx: Context) {
     });
 
     await photoCtx.getFile();
-    await photoCtx.reply(`Спасибо, ваши пояснения по заказу 175-2 <b>приняты</b>, фото загружено`, {
+    await ctx.replyWithPhoto(photoCtx.message?.photo.at(-1)?.file_id!, {
+      caption: `<b>Отчет!</b>
+Спасибо, приняты следующие пояснения по заказу 175-2
+- ${responceCourier.msg.text}`,
+      reply_parameters: { message_id: question.message_id, quote: question.text },
       parse_mode: 'HTML',
     });
     return;
@@ -78,9 +80,14 @@ export async function testOrder(conversation: Conversation, ctx: Context) {
 
   // завершение диалога без рисунка
   if (photoResponce.callbackQuery.data === 'Нет тест') {
-    await ctx.reply(`Спасибо, ваши пояснения по заказу 175-2 <b>приняты</b>`, {
-      parse_mode: 'HTML',
-      reply_parameters: { message_id: question.message_id, quote: question.text },
-    });
+    await ctx.reply(
+      `<b>Отчет!</b>
+Спасибо, приняты следующие пояснения по заказу 175-2
+- ${responceCourier.msg.text}`,
+      {
+        reply_parameters: { message_id: question.message_id, quote: question.text },
+        parse_mode: 'HTML',
+      },
+    );
   }
 }

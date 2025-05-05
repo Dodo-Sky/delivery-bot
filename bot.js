@@ -10,7 +10,6 @@ var listCommands_1 = require("./commands/listCommands");
 var handlers_1 = require("./commands/handlers");
 var config_1 = require("./config");
 var bot = new grammy_1.Bot(config_1.TELEGRAM_BOT_TOKEN);
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 bot.api.config.use((0, auto_retry_1.autoRetry)({
     rethrowInternalServerErrors: true, // не обрабатывать внутренние ошибки сервера
 }));
