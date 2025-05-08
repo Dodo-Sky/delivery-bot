@@ -5,7 +5,7 @@ import { responceCourier } from "./middleware/middleware";
 import { responce } from "./conversation/orderProblem/orderProblem";
 import { testOrder } from "./conversation/testOrder/testOrder";
 import { getLisCommands } from "./commands/listCommands";
-import { qrcode, faq, payment, start, my_orders, mysalary } from "./commands/handlers";
+import { qrcode, faq, payment, start, my_orders, mysalary, problem_orders } from "./commands/handlers";
 import { TELEGRAM_BOT_TOKEN } from './config';
 
 const bot = new Bot<ConversationFlavor<Context>>(TELEGRAM_BOT_TOKEN);
@@ -30,7 +30,7 @@ bot.command('qrcode', (ctx) => qrcode(ctx));
 bot.command('payment', (ctx) => payment(ctx));
 bot.command('my_orders', (ctx) => my_orders(ctx));
 bot.command('mysalary', (ctx) => mysalary(ctx));
-// bot.command('problem_orders', (ctx) => problem_orders(ctx));
+bot.command('problem_orders', (ctx) => problem_orders(ctx));
 bot.command('faq', (ctx) => ctx.reply(faq(), { parse_mode: 'Markdown' }));
 bot.command('start', (ctx) => ctx.reply(start()));
 bot.command('test', (ctx) => ctx.conversation.enter('testOrder'));

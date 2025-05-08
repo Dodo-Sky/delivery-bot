@@ -1,5 +1,6 @@
-import { postDataServer } from '../services/api';
+import { postDataServer, getDataFromServer } from '../services/api';
 import { type Context } from 'grammy';
+import { StaffData, CouriersOrder } from '../type/type';
 
 export function qrcode(ctx: Context) {
   postDataServer('qrcode', { content: '/qrcode', chatId: ctx.chatId });
@@ -11,6 +12,10 @@ export function payment(ctx: Context) {
 
 export function mysalary(ctx: Context) {
   postDataServer('mysalary', { content: '/mysalary', chatId: ctx.chatId });
+}
+
+export function problem_orders (ctx: Context) {
+  postDataServer('problem_orders', { content: '/problem_orders', chatId: ctx.chatId });
 }
 
 export function faq() {

@@ -27,7 +27,7 @@ bot.command('qrcode', function (ctx) { return (0, handlers_1.qrcode)(ctx); });
 bot.command('payment', function (ctx) { return (0, handlers_1.payment)(ctx); });
 bot.command('my_orders', function (ctx) { return (0, handlers_1.my_orders)(ctx); });
 bot.command('mysalary', function (ctx) { return (0, handlers_1.mysalary)(ctx); });
-// bot.command('problem_orders', (ctx) => problem_orders(ctx));
+bot.command('problem_orders', function (ctx) { return (0, handlers_1.problem_orders)(ctx); });
 bot.command('faq', function (ctx) { return ctx.reply((0, handlers_1.faq)(), { parse_mode: 'Markdown' }); });
 bot.command('start', function (ctx) { return ctx.reply((0, handlers_1.start)()); });
 bot.command('test', function (ctx) { return ctx.conversation.enter('testOrder'); });

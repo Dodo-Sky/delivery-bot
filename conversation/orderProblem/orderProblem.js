@@ -154,7 +154,7 @@ function responce(conversation, ctx) {
                 case 12:
                     uploadedFileUrl = _e.sent();
                     return [4 /*yield*/, ctx.replyWithPhoto((_d = (_c = photoCtx.message) === null || _c === void 0 ? void 0 : _c.photo.at(-1)) === null || _d === void 0 ? void 0 : _d.file_id, {
-                            caption: "<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, "\n- ").concat(responceCourier.msg.text),
+                            caption: "<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, "\n- ").concat(responceCourier.msg.text, "\n\n\u0427\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0438\u0441\u0430\u0442\u044C \u043E\u0442\u0432\u0435\u0442 \u0441\u043D\u043E\u0432\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 <b>\u041E\u0442\u0432\u0435\u0442\u0438\u0442\u044C</b>"),
                             reply_parameters: { message_id: question.message_id, quote: question.text },
                             parse_mode: 'HTML',
                         })];
@@ -169,7 +169,7 @@ function responce(conversation, ctx) {
                     return [2 /*return*/];
                 case 15:
                     if (!(photoResponce.callbackQuery.data === 'Нет')) return [3 /*break*/, 18];
-                    return [4 /*yield*/, ctx.reply("<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, "\n- ").concat(responceCourier.msg.text), {
+                    return [4 /*yield*/, ctx.reply("<b>\u041E\u0442\u0447\u0435\u0442!</b>\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u043F\u0440\u0438\u043D\u044F\u0442\u044B \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u044F\u0441\u043D\u0435\u043D\u0438\u044F \u043F\u043E \u0437\u0430\u043A\u0430\u0437\u0443 ".concat(order.orderNumber, "\n- ").concat(responceCourier.msg.text, "\n\n\u0427\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0438\u0441\u0430\u0442\u044C \u043E\u0442\u0432\u0435\u0442 \u0441\u043D\u043E\u0432\u0430 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 <b>\u041E\u0442\u0432\u0435\u0442\u0438\u0442\u044C</b>"), {
                             reply_parameters: { message_id: question.message_id, quote: question.text },
                             parse_mode: 'HTML',
                         })];

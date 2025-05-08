@@ -13,6 +13,8 @@ export interface StaffData {
   status: string;
   lastModifiedAt: string;
   idTelegramm: number;
+  unitId: string;
+  departmentName: string;
 }
 
 export interface CouriersOrder {
@@ -50,4 +52,14 @@ export interface CouriersOrder {
   dateResponceCourier: string,
   departmentName: string,
   urlPhoto? : string,
+}
+
+
+export interface Departments {
+  DepartmentUUId: string;
+  departmentName: string;
+  units: [string];
+  organizations: [string];
+  access_token: string;
+  passwordAdm: string;
 }

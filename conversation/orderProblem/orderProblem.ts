@@ -73,7 +73,9 @@ export async function responce(conversation: Conversation, ctx: Context) {
     await ctx.replyWithPhoto(photoCtx.message?.photo.at(-1)?.file_id!, {
       caption: `<b>Отчет!</b>
 Спасибо, приняты следующие пояснения по заказу ${order.orderNumber}
-- ${responceCourier.msg.text}`,
+- ${responceCourier.msg.text}
+
+Чтобы перезаписать ответ снова нажмите <b>Ответить</b>`,
       reply_parameters: { message_id: question.message_id, quote: question.text },
       parse_mode: 'HTML',
     });
@@ -90,7 +92,9 @@ export async function responce(conversation: Conversation, ctx: Context) {
     await ctx.reply(
       `<b>Отчет!</b>
 Спасибо, приняты следующие пояснения по заказу ${order.orderNumber}
-- ${responceCourier.msg.text}`,
+- ${responceCourier.msg.text}
+
+Чтобы перезаписать ответ снова нажмите <b>Ответить</b>`,
       {
         reply_parameters: { message_id: question.message_id, quote: question.text },
         parse_mode: 'HTML',
