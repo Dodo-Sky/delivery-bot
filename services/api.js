@@ -79,6 +79,7 @@ function postDataServer(variableName, payload) {
                 case 0:
                     _a.trys.push([0, 6, , 7]);
                     url = "".concat(URL).concat(variableName);
+                    console.log(url);
                     return [4 /*yield*/, fetch(url, {
                             method: 'POST',
                             headers: {
@@ -91,6 +92,7 @@ function postDataServer(variableName, payload) {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
+                    console.log(response);
                     if (!response.ok) return [3 /*break*/, 3];
                     return [2 /*return*/, data];
                 case 3: return [4 /*yield*/, response.text()];

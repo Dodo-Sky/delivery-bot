@@ -1,6 +1,5 @@
 import { postDataServer, getDataFromServer } from '../services/api';
 import { type Context } from 'grammy';
-import { StaffData, CouriersOrder } from '../type/type';
 
 export function qrcode(ctx: Context) {
   postDataServer('qrcode', { content: '/qrcode', chatId: ctx.chatId });
@@ -16,6 +15,10 @@ export function mysalary(ctx: Context) {
 
 export function problem_orders (ctx: Context) {
   postDataServer('problem_orders', { content: '/problem_orders', chatId: ctx.chatId });
+}
+
+export async function my_orders(ctx: Context) {
+  postDataServer('my_orders', { content: '/my_orders', chatId: ctx.chatId });
 }
 
 export function faq() {
@@ -64,8 +67,4 @@ export function start() {
   return `
 Приветствую тебя. Я бот Додо пицца и буду подсказывать тебе если что то не так будет с заказами. Покажи это сообщение своему управляющему. Надеюсь что не буду тебя сильно беспокоить.
 `;
-}
-
-export async function my_orders(ctx: Context) {
-  postDataServer('my_orders', { content: '/my_orders', chatId: ctx.chatId });
 }
