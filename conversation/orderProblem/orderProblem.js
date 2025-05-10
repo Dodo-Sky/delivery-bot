@@ -107,13 +107,24 @@ function responce(conversation, ctx) {
                         })];
                 case 6:
                     responceCourier = _e.sent();
-                    return [4 /*yield*/, conversation.external(function () {
-                            if (responceCourier.msg.text) {
-                                var dateResponce = (0, date_fns_1.fromUnixTime)(responceCourier.msg.date).toLocaleString();
-                                order.courierComment = responceCourier.msg.text;
-                                order.dateResponceCourier = dateResponce;
-                            }
-                        })];
+                    return [4 /*yield*/, conversation.external(function () { return __awaiter(_this, void 0, void 0, function () {
+                            var unitsSettings, timeZoneShift, dateResponce;
+                            var _a;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
+                                    case 0: return [4 /*yield*/, (0, api_1.getDataFromServer)("unitsSettings")];
+                                    case 1:
+                                        unitsSettings = _b.sent();
+                                        timeZoneShift = (_a = unitsSettings.find(function (el) { return order.unitId === el.unitId; })) === null || _a === void 0 ? void 0 : _a.timeZoneShift;
+                                        if (responceCourier.msg.text && typeof timeZoneShift === 'number') {
+                                            dateResponce = (0, date_fns_1.format)((0, date_fns_1.addHours)((0, date_fns_1.fromUnixTime)(responceCourier.msg.date), timeZoneShift), 'dd.MM.yyyy HH:mm');
+                                            order.courierComment = responceCourier.msg.text;
+                                            order.dateResponceCourier = dateResponce;
+                                        }
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }); })];
                 case 7:
                     _e.sent();
                     return [4 /*yield*/, ctx.reply('Хотите приложить фото к пояснению?', {

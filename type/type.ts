@@ -49,11 +49,11 @@ export interface CouriersOrder {
     isSendToCourier: boolean;
     date: string;
   };
-  dateResponceCourier: string,
-  departmentName: string,
-  urlPhoto? : string,
+  dateResponceCourier: string;
+  departmentName: string;
+  urlPhoto?: string;
+  unitId: string;
 }
-
 
 export interface Departments {
   DepartmentUUId: string;
@@ -62,4 +62,18 @@ export interface Departments {
   organizations: [string];
   access_token: string;
   passwordAdm: string;
+}
+
+export interface UnitsSettings {
+  type: string;
+  unitName: string;
+  unitId: string;
+  programs: [{ name: string; isActive: boolean }];
+  idTelegramm: [{ id: number; nameFunction: boolean; fio: boolean }];
+  departmentUUId: string;
+  departmentName: string;
+  timeZoneShift: number;
+  RestaurantWeekWorkingTime: [{ DayIndex: number; DayAlias: string; WorkingTimeStart: number; WorkingTimeEnd: number }];
+  DeliveryWeekWorkingTime: [{ DayIndex: number; DayAlias: string; WorkingTimeStart: number; WorkingTimeEnd: number }];
+  isActive: boolean;
 }
