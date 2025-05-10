@@ -59,7 +59,6 @@ function problem_orders(ctx) {
 function my_orders(ctx) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            console.log('1111');
             (0, api_1.postDataServer)('my_orders', { content: '/my_orders', chatId: ctx.chatId });
             return [2 /*return*/];
         });

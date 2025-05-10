@@ -49,7 +49,6 @@ function getLisCommands(bot) {
                         { command: 'test', description: 'Обучающий заказ' },
                         { command: 'my_orders', description: 'Все мои заказы за последние 24 часа' },
                         { command: 'problem_orders', description: 'Проблемные поездки' },
-                        { command: 'test1', description: 'test1' },
                     ], {
                         scope: {
                             type: 'all_private_chats',
