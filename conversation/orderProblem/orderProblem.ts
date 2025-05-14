@@ -41,11 +41,10 @@ export async function responce(conversation: Conversation, ctx: Context) {
     });
 
   await conversation.external(async () => {
-
     const unitsSettings: [UnitsSettings] = await getDataFromServer(`unitsSettings`);
-    const timeZoneShift = unitsSettings.find (el => order.unitId === el.unitId)?.timeZoneShift;
-    if (responceCourier.msg.text &&  typeof timeZoneShift === 'number') {
-      let dateResponce = format(addHours(fromUnixTime(responceCourier.msg.date), timeZoneShift), 'dd.MM.yyyy HH:mm')
+    const timeZoneShift = unitsSettings.find((el) => order.unitId === el.unitId)?.timeZoneShift;
+    if (responceCourier.msg.text && typeof timeZoneShift === 'number') {
+      let dateResponce = format(addHours(fromUnixTime(responceCourier.msg.date), timeZoneShift), 'dd.MM.yyyy HH:mm');
       order.courierComment = responceCourier.msg.text;
       order.dateResponceCourier = dateResponce;
     }
