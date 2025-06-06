@@ -14,26 +14,16 @@ const grammy_1 = require("grammy");
 const api_1 = require("../../services/api");
 const date_fns_1 = require("date-fns");
 const files_1 = require("../../services/files");
-function getOrderFromServer(orderId, departmentName) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const dataFromServer = yield (0, api_1.getDataFromServer)(`${departmentName}/couriersOrder`);
-        const order = dataFromServer.find((el) => el.orderId === orderId);
-        if (order) {
-            return order;
-        }
-        else
-            return undefined;
-    });
-}
 function responce(conversation, ctx) {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b, _c;
         const [, orderId, departmentName] = yield ((_a = ctx.callbackQuery) === null || _a === void 0 ? void 0 : _a.data.split(':'));
-        const order = yield conversation.external(() => getOrderFromServer(orderId, departmentName));
-        if (!order) {
+        const orderArr = yield conversation.external(() => __awaiter(this, void 0, void 0, function* () { return yield (0, api_1.postDataServer)('query_telegramm', { orderId: orderId }); }));
+        if (orderArr.length === 0) {
             yield ctx.reply('Поездка устарела и ее нет в базе данных');
             return;
         }
+        const order = orderArr[0];
         const question = yield ctx.reply(`Напишите в чат ваш ответ текстом по заказу ${order.orderNumber}`);
         const responceCourier = yield conversation
             .waitFor('message:text', {
@@ -89,7 +79,7 @@ function responce(conversation, ctx) {
             });
             order.urlPhoto = uploadedFileUrl;
             yield conversation.external(() => {
-                (0, api_1.postDataServer)('couriersOrder', order);
+                (0, api_1.postDataServer)('couriersOrderSQL', order);
             });
             return;
         }
@@ -104,7 +94,7 @@ function responce(conversation, ctx) {
                 parse_mode: 'HTML',
             });
             yield conversation.external(() => {
-                (0, api_1.postDataServer)('couriersOrder', order);
+                (0, api_1.postDataServer)('couriersOrderSQL', order);
             });
             return;
         }

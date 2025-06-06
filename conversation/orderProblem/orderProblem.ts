@@ -5,24 +5,19 @@ import { CouriersOrder, UnitsSettings } from '../../type/type';
 import { fromUnixTime, format, addHours } from 'date-fns';
 import { uploadTelegramFileToStorage } from '../../services/files';
 
-async function getOrderFromServer(orderId: string, departmentName: string): Promise<CouriersOrder | undefined> {
-  const dataFromServer: CouriersOrder[] = await getDataFromServer(`${departmentName}/couriersOrder`);
-  const order: CouriersOrder | undefined = dataFromServer.find((el: CouriersOrder) => el.orderId === orderId);
-  if (order) {
-    return order;
-  } else return undefined;
-}
-
 export async function responce(conversation: Conversation, ctx: Context) {
   const [, orderId, departmentName] = await ctx.callbackQuery?.data!.split(':')!;
-  const order: CouriersOrder | undefined = await conversation.external(() =>
-    getOrderFromServer(orderId, departmentName),
+  
+  const orderArr: [CouriersOrder] = await conversation.external(async () =>
+    await postDataServer('query_telegramm', {orderId: orderId}),
   );
-  if (!order) {
+
+  if (orderArr.length === 0) {
     await ctx.reply('Поездка устарела и ее нет в базе данных');
     return;
   }
 
+  const order: CouriersOrder = orderArr[0];
   const question = await ctx.reply(`Напишите в чат ваш ответ текстом по заказу ${order.orderNumber}`);
   const responceCourier = await conversation
     .waitFor('message:text', {
@@ -84,7 +79,7 @@ export async function responce(conversation: Conversation, ctx: Context) {
     order.urlPhoto = uploadedFileUrl;
 
     await conversation.external(() => {
-      postDataServer('couriersOrder', order);
+      postDataServer('couriersOrderSQL', order);
     });
     return;
   }
@@ -103,7 +98,7 @@ export async function responce(conversation: Conversation, ctx: Context) {
       },
     );
     await conversation.external(() => {
-      postDataServer('couriersOrder', order);
+      postDataServer('couriersOrderSQL', order);
     });
     return;
   }
