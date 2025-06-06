@@ -27,9 +27,9 @@ export async function responce(conversation: Conversation, ctx: Context) {
           parse_mode: 'HTML',
         }),
     })
-    .and((ctx) => ctx.msg?.text?.length! < 255, {
+    .and((ctx) => ctx.msg?.text?.length! < 350, {
       otherwise: async (ctx) =>
-        await ctx.reply('<b>Ошибка!</b> Cлишком длинный ответ (максимум <b>255!</b> символов)', {
+        await ctx.reply('<b>Ошибка!</b> Cлишком длинный ответ (максимум <b>350!</b> символов)', {
           reply_parameters: { message_id: question.message_id },
           parse_mode: 'HTML',
         }),
@@ -41,7 +41,7 @@ export async function responce(conversation: Conversation, ctx: Context) {
     if (responceCourier.msg.text && typeof timeZoneShift === 'number') {
       let dateResponce = format(addHours(fromUnixTime(responceCourier.msg.date), timeZoneShift), 'dd.MM.yyyy HH:mm');
       order.courierComment = responceCourier.msg.text;
-      order. = dateResponce;
+      order.dateResponceCourier = dateResponce;
     }
   });
 
