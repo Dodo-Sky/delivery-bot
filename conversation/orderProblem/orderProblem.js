@@ -19,7 +19,7 @@ function responce(conversation, ctx) {
         var _a, _b, _c;
         const [, orderId, departmentName] = yield ((_a = ctx.callbackQuery) === null || _a === void 0 ? void 0 : _a.data.split(':'));
         const orderArr = yield conversation.external(() => __awaiter(this, void 0, void 0, function* () { return yield (0, api_1.postDataServer)('query_telegramm', { orderId: orderId }); }));
-        if (orderArr.length === 0) {
+        if (orderArr.length < 1) {
             yield ctx.reply('Поездка устарела и ее нет в базе данных');
             return;
         }
@@ -79,7 +79,12 @@ function responce(conversation, ctx) {
             });
             order.urlPhoto = uploadedFileUrl;
             yield conversation.external(() => {
-                (0, api_1.postDataServer)('couriersOrderSQL', order);
+                (0, api_1.postDataServer)('couriersOrderSQL', {
+                    orderId: order.orderId,
+                    courierComment: order.courierComment,
+                    urlPhoto: order.urlPhoto,
+                    dateResponceCourier: order.dateResponceCourier,
+                });
             });
             return;
         }
@@ -94,7 +99,12 @@ function responce(conversation, ctx) {
                 parse_mode: 'HTML',
             });
             yield conversation.external(() => {
-                (0, api_1.postDataServer)('couriersOrderSQL', order);
+                (0, api_1.postDataServer)('couriersOrderSQL', {
+                    orderId: order.orderId,
+                    courierComment: order.courierComment,
+                    urlPhoto: order.urlPhoto,
+                    dateResponceCourier: order.dateResponceCourier,
+                });
             });
             return;
         }

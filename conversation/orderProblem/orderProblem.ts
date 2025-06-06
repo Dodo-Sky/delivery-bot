@@ -7,9 +7,9 @@ import { uploadTelegramFileToStorage } from '../../services/files';
 
 export async function responce(conversation: Conversation, ctx: Context) {
   const [, orderId, departmentName] = await ctx.callbackQuery?.data!.split(':')!;
-  
-  const orderArr: [CouriersOrder] = await conversation.external(async () =>
-    await postDataServer('query_telegramm', {orderId: orderId}),
+
+  const orderArr: [CouriersOrder] = await conversation.external(
+    async () => await postDataServer('query_telegramm', { orderId: orderId }),
   );
 
   if (orderArr.length < 1) {
@@ -79,7 +79,12 @@ export async function responce(conversation: Conversation, ctx: Context) {
     order.urlPhoto = uploadedFileUrl;
 
     await conversation.external(() => {
-      postDataServer('couriersOrderSQL', order);
+      postDataServer('couriersOrderSQL', {
+        orderId: order.orderId,
+        courierComment: order.courierComment,
+        urlPhoto: order.urlPhoto,
+        dateResponceCourier: order.dateResponceCourier,
+      });
     });
     return;
   }
@@ -98,7 +103,12 @@ export async function responce(conversation: Conversation, ctx: Context) {
       },
     );
     await conversation.external(() => {
-      postDataServer('couriersOrderSQL', order);
+      postDataServer('couriersOrderSQL', {
+        orderId: order.orderId,
+        courierComment: order.courierComment,
+        urlPhoto: order.urlPhoto,
+        dateResponceCourier: order.dateResponceCourier,
+      });
     });
     return;
   }
