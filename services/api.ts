@@ -21,6 +21,7 @@ export const getDataFromServer = async (variable: string) => {
 };
 
 export async function postDataServer(variableName: string, payload: any) {
+  console.log(`Request to API [POST]: ${variableName} ${payload}`)
   try {
     const url = `${URL}${variableName}`;
     const response = await fetch(url, {
