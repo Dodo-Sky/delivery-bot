@@ -3,6 +3,7 @@ import { type ConversationFlavor, conversations, createConversation } from '@gra
 import { autoRetry } from '@grammyjs/auto-retry';
 import { responceCourier } from "./middleware/middleware";
 import { responce } from "./conversation/orderProblem/orderProblem";
+import { raiting } from "./conversation/raiting/raiting";
 import { testOrder } from "./conversation/testOrder/testOrder";
 import { getLisCommands } from "./commands/listCommands";
 import { qrcode, faq, payment, start, my_orders, mysalary, problem_orders } from "./commands/handlers";
@@ -20,6 +21,7 @@ const oneHourInMilliseconds = 30 * 60 * 1000;
 // установка диалогов в настройки бота
 bot.use(createConversation(responce, { maxMillisecondsToWait: oneHourInMilliseconds }));
 bot.use(createConversation(testOrder, { maxMillisecondsToWait: oneHourInMilliseconds }));
+bot.use(createConversation(raiting, { maxMillisecondsToWait: oneHourInMilliseconds }));
 
 // запуск обработчиков по программам
 bot.on('callback_query:data', responceCourier);
@@ -31,6 +33,7 @@ bot.command('payment', (ctx) => payment(ctx));
 bot.command('my_orders', (ctx) => my_orders(ctx));
 bot.command('mysalary', (ctx) => mysalary(ctx));
 bot.command('problem_orders', (ctx) => problem_orders(ctx));
+bot.command('rating',  (ctx) => ctx.conversation.enter('raiting'));
 bot.command('faq', (ctx) => ctx.reply(faq(), { parse_mode: 'Markdown' }));
 bot.command('start', (ctx) => ctx.reply(start()));
 bot.command('test', (ctx) => ctx.conversation.enter('testOrder'));

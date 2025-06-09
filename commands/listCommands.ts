@@ -8,6 +8,8 @@ export async function getLisCommands(bot: any) {
       { command: 'test', description: 'Обучающий заказ' },
       { command: 'my_orders', description: 'Все мои заказы за последние 24 часа' },
       { command: 'problem_orders', description: 'Проблемные поездки' },
+      { command: 'rating', description: 'Рейтинг и премия за скорость' },
+
     ],
     {
       scope: {

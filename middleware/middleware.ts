@@ -9,6 +9,3 @@ export async function responceCourier (ctx: ConversationFlavor<Context>, next: N
   }
   await next();
 }
-
-let date1 = new Date ()
-console.log(date1);

@@ -5,7 +5,7 @@ import { CouriersOrder, UnitsSettings } from '../../type/type';
 import { fromUnixTime, format, addHours } from 'date-fns';
 import { uploadTelegramFileToStorage } from '../../services/files';
 
-export async function responce(conversation: Conversation, ctx: Context) {
+export async function responce (conversation: Conversation, ctx: Context) {
   const [, orderId, departmentName] = await ctx.callbackQuery?.data!.split(':')!;
 
   const orderArr: [CouriersOrder] = await conversation.external(

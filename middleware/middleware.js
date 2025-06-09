@@ -21,5 +21,3 @@ function responceCourier(ctx, next) {
         yield next();
     });
 }
-let date1 = new Date();
-console.log(date1);
