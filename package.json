@@ -1,7 +1,7 @@
 {
   "name": "delivery-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "start": "nodemon --ignore dialogs-data/ bot.js"
   },
@@ -10,6 +10,7 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/node-fetch": "^2.6.12",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^10.1.1",
@@ -20,7 +21,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": "^3.5.3",
     "tsup": "^8.4.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",

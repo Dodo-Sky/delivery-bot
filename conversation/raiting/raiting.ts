@@ -24,7 +24,8 @@ export async function raiting(conversation: Conversation, ctx: Context) {
       postDataServer('rating', {
         chatId: ctx.chatId,
         week: getWeek (new Date ()),
-        content: '/rating'
+        content: '/rating',
+        queryWeek: 'Текущая неделя'
       });
     });
     return;
@@ -35,7 +36,8 @@ export async function raiting(conversation: Conversation, ctx: Context) {
       postDataServer('rating', {
         chatId: ctx.chatId,
         week: (getWeek (new Date ())) - 1,
-        content: '/rating'
+        content: '/rating',
+        queryWeek: 'Прошедшая неделя'
       });
     });
     return;
