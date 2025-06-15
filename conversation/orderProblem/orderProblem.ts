@@ -2,7 +2,7 @@ import { type Context, InlineKeyboard } from 'grammy';
 import { type Conversation } from '@grammyjs/conversations';
 import { getDataFromServer, postDataServer } from '../../services/api';
 import { CouriersOrder, UnitsSettings } from '../../type/type';
-import { fromUnixTime, format, addHours } from 'date-fns';
+import { fromUnixTime, addHours, formatISO } from 'date-fns';
 import { uploadTelegramFileToStorage } from '../../services/files';
 
 export async function responce (conversation: Conversation, ctx: Context) {
@@ -39,7 +39,7 @@ export async function responce (conversation: Conversation, ctx: Context) {
     const unitsSettings: [UnitsSettings] = await getDataFromServer(`unitsSettings`);
     const timeZoneShift = unitsSettings.find((el) => order.unitId === el.unitId)?.timeZoneShift;
     if (responceCourier.msg.text && typeof timeZoneShift === 'number') {
-      let dateResponce = format(addHours(fromUnixTime(responceCourier.msg.date), timeZoneShift), 'dd.MM.yyyy HH:mm');
+      let dateResponce = formatISO(addHours(fromUnixTime(responceCourier.msg.date), timeZoneShift));
       order.courierComment = responceCourier.msg.text;
       order.dateResponceCourier = dateResponce;
     }
